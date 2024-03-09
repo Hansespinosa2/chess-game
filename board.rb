@@ -3,7 +3,7 @@ class Board
   attr :board_matrix
   def initialize(board_matrix = nil)
     if board_matrix.nil? then
-      @board_matrix = Array.new(8) { Array.new(8,'( )') }
+      @board_matrix = 8.times.map { |i| 8.times.map { |j| "T#{i}#{j}"} }
     else
       @board_matrix = board_matrix
     end
@@ -13,7 +13,7 @@ class Board
     @board_matrix.each_with_index do |row, i|
       row.each_with_index do |sym, j|
         if sym == ficha.sym then
-          @board_matrix[i][j] = '()'
+          @board_matrix[i][j] = "T#{i}#{j}"
           break
         end
       end
