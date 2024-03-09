@@ -3,19 +3,19 @@ class Board
   attr_accessor :board_matrix, :ficha_hash
   def initialize(board_matrix = nil)
     if board_matrix.nil? then
-      @board_matrix = 8.times.map { |i| 8.times.map { |j| "T#{i}#{j}"} }
+      @board_matrix = 8.times.map { |i| 8.times.map { |j| "( )"} }
 
     else
       @board_matrix = board_matrix
     end
-    @ficha_hash = self.update_ficha_hash
+    @ficha_hash = self.initiate_ficha_hash
   end
 
   def move_piece(ficha)
     @board_matrix.each_with_index do |row, i|
       row.each_with_index do |sym, j|
         if sym == ficha.sym then
-          @board_matrix[i][j] = "T#{i}#{j}"
+          @board_matrix[i][j] = "( )"
           break
         end
       end
@@ -25,14 +25,15 @@ class Board
   end
 
   def display_board
+
     pp @board_matrix
   end
 
-  def update_ficha_hash
+  def initiate_ficha_hash
     a_hash = {}
     @board_matrix.each_with_index do |row, i|
       row.each_with_index do |sym, j|
-        a_hash[[i,j]] = sym
+        a_hash[[i,j]] = nil
       end
     end
     a_hash

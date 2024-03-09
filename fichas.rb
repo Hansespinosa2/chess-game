@@ -8,16 +8,18 @@ class Ficha
     @sym = sym
   end
 
-  def move(delta_row=0,delta_col=0) #Row positive means to the right and column positive means up
-    if self.can_move?(delta_row, delta_col) then
-        @row = row - delta_row
-        @col = @col + delta_col
+  def move_to(new_row,new_col) #Row positive means to the right and column positive means up
+    if self.valid_move?(@row,@col, new_row,new_col) then
+
+        @row = new_row
+        @col = new_col
     else
-      p 'Illegaly move'
+      p 'Illegal move'
+      return false
     end
   end
 
-  def can_move?(row, col)
+  def valid_move?(old_row,old_col, new_row,new_col)
     true
   end
 
@@ -39,20 +41,28 @@ class Pawn < Ficha
     @sym = sym.to_s + color.to_s + id.to_s
   end
 
-  def can_move?(delta_row, delta_col)
+  def valid_move?(old_row,old_col, new_row,new_col)
+    delta_col = new_col-old_col
+    delta_row = new_row-old_row
     if delta_col != 0 then
-      false
+      p 'failed delta_col !=0'
+      return false
     end
 
     if @side=='bottom' then
-      if !(delta_row == 1 or (delta_row == 2 and @row == 6)) then
-        false
+      if !(delta_row == -1 or (delta_row == -2 and @row == 6)) then
+        p delta_row
+        p @row
+
+        p 'failed not(change is 1 or (change is 2 and row is 6))'
+        return false
       end
     else
-      if !(delta_row == -1 or (delta_row == -2 and @row == 1)) then
-        false
+      if !(delta_row == 1 or (delta_row == 2 and @row == 1)) then
+        p 'failed not(change is -1 or (change is 2 and row is 1))'
+        return false
       end
     end
-    true
+    return true
   end
 end
