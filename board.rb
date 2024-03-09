@@ -11,21 +11,8 @@ class Board
     @ficha_hash = self.initiate_ficha_hash
   end
 
-  def move_piece(ficha)
-    @board_matrix.each_with_index do |row, i|
-      row.each_with_index do |sym, j|
-        if sym == ficha.sym then
-          @board_matrix[i][j] = "( )"
-          break
-        end
-      end
-    end
-    @board_matrix[ficha.row][ficha.col] = ficha.sym
-
-  end
 
   def display_board
-
     pp @board_matrix
   end
 
@@ -37,6 +24,29 @@ class Board
       end
     end
     a_hash
+  end
+
+  def can_eat?(eater_pos,eaten_pos)
+    eater = @ficha_hash[eater_pos]
+    eaten = @ficha_hash[eaten_pos]
+    if eaten.nil? then
+      if eater.sym[0] == 'p' and (eater_pos[1] - eaten_pos[1]).abs == 1 then
+        return false
+      end
+
+      return true
+    elsif eater.color == eaten.color then
+      return false
+    elsif eaten.sym[0] == 'k' then
+      return false
+    elsif eater.sym[0] == 'p' and (eater.col-eaten.col).abs == 0 #return false if a pawn tries to take something straight on
+      return false
+    end
+
+
+    return true
+
+
   end
 
 end

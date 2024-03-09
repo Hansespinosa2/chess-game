@@ -23,9 +23,6 @@ class Ficha
     true
   end
 
-  def can_eat?(row, col)
-    true
-  end
 
 end
 
@@ -44,10 +41,10 @@ class Pawn < Ficha
   def valid_move?(old_row,old_col, new_row,new_col)
     delta_col = new_col-old_col
     delta_row = new_row-old_row
-    if delta_col != 0 then
-      p 'failed delta_col !=0'
+    if delta_col.abs > 1 then
       return false
     end
+
 
     if @side=='bottom' then
       if !(delta_row == -1 or (delta_row == -2 and @row == 6)) then
@@ -63,6 +60,9 @@ class Pawn < Ficha
         return false
       end
     end
+
+
+
     return true
   end
 end

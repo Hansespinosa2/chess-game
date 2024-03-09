@@ -59,7 +59,7 @@ class Game
         print("Nothing on the tile #{old_pos}\n")
         next
       end
-      if @board.ficha_hash[old_pos].valid_move?(*old_pos,*new_pos)
+      if @board.ficha_hash[old_pos].valid_move?(*old_pos,*new_pos) and @board.can_eat?(old_pos,new_pos)
         @board.ficha_hash[old_pos].move_to(*new_pos)
       else
         print("#{@board.ficha_hash[old_pos].class.name}s cannot move that way \n")
@@ -69,8 +69,6 @@ class Game
       @board.ficha_hash[old_pos] = nil
       @board.board_matrix[old_pos[0]][old_pos[1]] = '( )'
       @board.board_matrix[new_pos[0]][new_pos[1]] = @board.ficha_hash[new_pos].sym
-
-
     end
   end
 
