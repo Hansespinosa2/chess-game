@@ -3,7 +3,7 @@ class Board
   attr :board_matrix
   def initialize(board_matrix = nil)
     if board_matrix.nil? then
-      @board_matrix = Array.new(8) { Array.new(8,'()') }
+      @board_matrix = Array.new(8) { Array.new(8,'( )') }
     else
       @board_matrix = board_matrix
     end

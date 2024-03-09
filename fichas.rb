@@ -30,15 +30,13 @@ end
 
 class Pawn < Ficha
   attr :sym, :row, :col, :color, :side
-  @@pawn_id = 0
-  def initialize(row=nil, col=nil, color='w',side='bottom', sym='p',id=0)
+  def initialize(row=nil, col=nil, color='w',side='bottom', id=0, sym='p')
     @row = row
     @col = col
     @color = color
     @side = side
-    @id = @@pawn_id+1
-    @sym = sym + @color + @id.to_s
-    @@pawn_id = @@pawn_id+1
+    @id = id
+    @sym = sym.to_s + color.to_s + id.to_s
   end
 
   def can_move?(delta_row, delta_col)
