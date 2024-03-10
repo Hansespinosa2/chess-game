@@ -46,13 +46,13 @@ class Game
 
         a_val = Knight.new(0,i,@guest_color,side='top')
       elsif i==2 or i==5 then
-        next
+
         a_val = Bishop.new(0,i,@guest_color,'top')
       elsif i==3 then
-        next
+
         a_val = Queen.new(0,i,@guest_color,'top')
       else
-        next
+
         a_val = King.new(0,i,@guest_color,'top')
       end
       @board.board_matrix[0][i] = a_val.sym
@@ -67,13 +67,13 @@ class Game
 
         a_val = Knight.new(7,i,@player_color,side='bottom')
       elsif i==2 or i==5 then
-        next
+
         a_val = Bishop.new(7,i,@player_color,'bottom')
       elsif i==3 then
-        next
+
         a_val = Queen.new(7,i,@player_color,'bottom')
       else
-        next
+
         a_val = King.new(7,i,@player_color,'bottom')
       end
       @board.board_matrix[7][i] = a_val.sym
@@ -120,8 +120,5 @@ class Game
   def won?
     false
   end
-
-
-
 
 end

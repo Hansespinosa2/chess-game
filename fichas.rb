@@ -107,14 +107,14 @@ class Bishop < Ficha
   attr :sym, :row, :col, :color, :side
   def initialize(row=nil, col=nil, color='w',side='bottom')
     super
-    @sym = 'h' + color.to_s
+    @sym = 'b' + color.to_s
   end
 
   def valid_move?(old_row,old_col, new_row,new_col)
     delta_col = new_col-old_col
     delta_row = new_row-old_row
 
-    if delta_col.abs + delta_row.abs == 3 and delta_col != 0 and delta_row != 0 then
+    if delta_col.abs == delta_row.abs then
       return true
     else
       return false
@@ -124,9 +124,40 @@ class Bishop < Ficha
 end
 
 class Queen < Ficha
+  attr :sym, :row, :col, :color, :side
+  def initialize(row=nil, col=nil, color='w',side='bottom')
+    super
+    @sym = 'q' + color.to_s
+  end
 
+  def valid_move?(old_row,old_col, new_row,new_col)
+    delta_col = new_col-old_col
+    delta_row = new_row-old_row
+
+    if delta_col.abs == delta_row.abs or (delta_col.abs > 0 and delta_row.abs > 0) then
+      return true
+    else
+      return false
+    end
+  end
 end
 
 class King < Ficha
+  attr :sym, :row, :col, :color, :side
+  def initialize(row=nil, col=nil, color='w',side='bottom')
+    super
+    @sym = 'k' + color.to_s
+  end
+
+  def valid_move?(old_row,old_col, new_row,new_col)
+    delta_col = new_col-old_col
+    delta_row = new_row-old_row
+
+    if delta_col.abs <=1 or delta_row.abs <=1 then
+      return true
+    else
+      return false
+    end
+  end
 
 end
