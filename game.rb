@@ -38,6 +38,48 @@ class Game
       @board.ficha_hash[[6,i]] = a_pawn
     end
 
+    #Put valuables on opponent's side
+    @board.board_matrix[0].each_with_index do |a_sym, i|
+      if i==0 or i==7 then
+        a_val = Rook.new(0,i,@guest_color,side='top')
+      elsif i==1 or i==6 then
+        next
+        a_val = Knight.new(0,i,@guest_color,side='top')
+      elsif i==2 or i==5 then
+        next
+        a_val = Bishop.new(0,i,@guest_color,'top')
+      elsif i==3 then
+        next
+        a_val = Queen.new(0,i,@guest_color,'top')
+      else
+        next
+        a_val = King.new(0,i,@guest_color,'top')
+      end
+      @board.board_matrix[0][i] = a_val.sym
+      @board.ficha_hash[[0,i]] = a_val
+    end
+
+    #Put valuables on player side
+    @board.board_matrix[7].each_with_index do |a_sym, i|
+      if i==0 or i==7 then
+        a_val = Rook.new(7,i,@player_color,side='top')
+      elsif i==1 or i==6 then
+        next
+        a_val = Knight.new(7,i,@player_color,side='top')
+      elsif i==2 or i==5 then
+        next
+        a_val = Bishop.new(7,i,@player_color,'top')
+      elsif i==3 then
+        next
+        a_val = Queen.new(7,i,@player_color,'top')
+      else
+        next
+        a_val = King.new(7,i,@player_color,'top')
+      end
+      @board.board_matrix[7][i] = a_val.sym
+      @board.ficha_hash[[7,i]] = a_val
+    end
+
   end
 
   def display_game
@@ -55,6 +97,8 @@ class Game
 
       old_pos = [input.split('')[1].to_i, input.split('')[3].to_i]
       new_pos = [input.split('')[8].to_i, input.split('')[10].to_i]
+
+
       if @board.ficha_hash[old_pos].nil? then
         print("Nothing on the tile #{old_pos}\n")
         next
@@ -65,6 +109,7 @@ class Game
         print("#{@board.ficha_hash[old_pos].class.name}s cannot move that way \n")
         next
       end
+
       @board.ficha_hash[new_pos] = @board.ficha_hash[old_pos]
       @board.ficha_hash[old_pos] = nil
       @board.board_matrix[old_pos[0]][old_pos[1]] = '--'

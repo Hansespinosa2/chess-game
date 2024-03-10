@@ -62,3 +62,39 @@ class Pawn < Ficha
     return true
   end
 end
+
+class Rook < Ficha
+  attr :sym, :row, :col, :color, :side
+  def initialize(row=nil, col=nil, color='w',side='bottom')
+    super
+    @sym = 'r' + color.to_s
+  end
+
+  def valid_move?(old_row,old_col, new_row,new_col)
+    delta_col = new_col-old_col
+    delta_row = new_row-old_row
+
+    if delta_col.abs > 0 and delta_row.abs > 0 then
+      return false
+    else
+      return true
+    end
+
+  end
+end
+
+class Knight < Ficha
+
+end
+
+class Bishop < Ficha
+
+end
+
+class Queen < Ficha
+
+end
+
+class King < Ficha
+
+end

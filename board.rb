@@ -12,6 +12,7 @@ class Board
   end
 
 
+
   def display_board
     puts "\n"
     pp @board_matrix
