@@ -84,10 +84,42 @@ class Rook < Ficha
 end
 
 class Knight < Ficha
+  attr :sym, :row, :col, :color, :side
+  def initialize(row=nil, col=nil, color='w',side='bottom')
+    super
+    @sym = 'h' + color.to_s
+  end
+
+  def valid_move?(old_row,old_col, new_row,new_col)
+    delta_col = new_col-old_col
+    delta_row = new_row-old_row
+
+    if delta_col.abs + delta_row.abs == 3 and delta_col != 0 and delta_row != 0 then
+      return true
+    else
+      return false
+    end
+  end
 
 end
 
 class Bishop < Ficha
+  attr :sym, :row, :col, :color, :side
+  def initialize(row=nil, col=nil, color='w',side='bottom')
+    super
+    @sym = 'h' + color.to_s
+  end
+
+  def valid_move?(old_row,old_col, new_row,new_col)
+    delta_col = new_col-old_col
+    delta_row = new_row-old_row
+
+    if delta_col.abs + delta_row.abs == 3 and delta_col != 0 and delta_row != 0 then
+      return true
+    else
+      return false
+    end
+  end
 
 end
 

@@ -43,7 +43,7 @@ class Game
       if i==0 or i==7 then
         a_val = Rook.new(0,i,@guest_color,side='top')
       elsif i==1 or i==6 then
-        next
+
         a_val = Knight.new(0,i,@guest_color,side='top')
       elsif i==2 or i==5 then
         next
@@ -62,19 +62,19 @@ class Game
     #Put valuables on player side
     @board.board_matrix[7].each_with_index do |a_sym, i|
       if i==0 or i==7 then
-        a_val = Rook.new(7,i,@player_color,side='top')
+        a_val = Rook.new(7,i,@player_color,side='bottom')
       elsif i==1 or i==6 then
-        next
-        a_val = Knight.new(7,i,@player_color,side='top')
+
+        a_val = Knight.new(7,i,@player_color,side='bottom')
       elsif i==2 or i==5 then
         next
-        a_val = Bishop.new(7,i,@player_color,'top')
+        a_val = Bishop.new(7,i,@player_color,'bottom')
       elsif i==3 then
         next
-        a_val = Queen.new(7,i,@player_color,'top')
+        a_val = Queen.new(7,i,@player_color,'bottom')
       else
         next
-        a_val = King.new(7,i,@player_color,'top')
+        a_val = King.new(7,i,@player_color,'bottom')
       end
       @board.board_matrix[7][i] = a_val.sym
       @board.ficha_hash[[7,i]] = a_val
