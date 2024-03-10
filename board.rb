@@ -37,11 +37,12 @@ class Board
         return false
       end
 
-      if self.crossed?(eater_pos,eaten_pos) and eater.sym[0] != 'h' then
+      unless self.crossed?(eater_pos,eaten_pos) and eater.sym[0] != 'h' then
+        return true
+      else
         return false
       end
 
-      return true
     elsif eater.color == eaten.color then
       return false
     elsif eaten.sym[0] == 'k' then
@@ -50,6 +51,9 @@ class Board
       return false
     end
 
+    if self.crossed?(eater_pos,eaten_pos) and eater.sym[0] != 'h' then
+      return false
+    end
 
 
     return true
@@ -58,15 +62,20 @@ class Board
   end
 
   def crossed?(eater_pos, eaten_pos)
-    for row in (eater_pos[0]..eaten_pos[0]).to_a
-      for col in (eater_pos[1]..eaten_pos[1]).to_a
-        p "#{row},#{col}"
+    min_row = [eater_pos[0],eaten_pos[0]].min
+    max_row = [eater_pos[0],eaten_pos[0]].max
+    min_col = [eater_pos[1],eaten_pos[1]].min
+    max_col = [eater_pos[1],eaten_pos[1]].max
+
+    for row in (min_row..max_row).to_a
+      for col in (min_col..max_col).to_a
         if !ficha_hash[[row,col]].nil? and ([row,col] != eater_pos and [row,col] != eaten_pos) then
-          return false
+          return true
         end
+
       end
     end
-    return true
+    return false
   end
 
 end

@@ -98,11 +98,18 @@ class Game
       old_pos = [input.split('')[1].to_i, input.split('')[3].to_i]
       new_pos = [input.split('')[8].to_i, input.split('')[10].to_i]
 
+      # if self.check?(@player_color) then
+      #   print("You are in check, you must move your king\n")
+      # elsif self.check?(@guest_color) then
+      #   print("Opponent is in check, they must move their king\n")
+      # end
+
 
       if @board.ficha_hash[old_pos].nil? then
         print("Nothing on the tile #{old_pos}\n")
         next
       end
+
       if @board.ficha_hash[old_pos].valid_move?(*old_pos,*new_pos) and @board.can_eat?(old_pos,new_pos)
         @board.ficha_hash[old_pos].move_to(*new_pos)
       else
@@ -117,8 +124,26 @@ class Game
     end
   end
 
-  def won?
-    false
+  def check?(color)
+    opp_color = color == 'b' ? 'w': 'b'
+
+    my_king = @board.ficha_hash.values.map { |ficha| (!ficha.nil? and ficha.sym=='k' + color) ? ficha : nil }.compact[0]
+    opp_fichas = @board.ficha_hash.values.map { |ficha| (!ficha.nil? and ficha.color==opp_color) ? ficha : nil }.compact
+    for ficha in opp_fichas
+      if ficha.valid_move?(ficha.row,ficha.col,my_king.row,my_king.col) and @board.can_eat?([ficha.row,ficha.col],[my_king.row,my_king.col])
+        return true
+      end
+
+    end
+    return false
+
+
+
   end
+
+  def won?
+    return false
+  end
+
 
 end

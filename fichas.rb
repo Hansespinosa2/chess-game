@@ -113,6 +113,8 @@ class Bishop < Ficha
   def valid_move?(old_row,old_col, new_row,new_col)
     delta_col = new_col-old_col
     delta_row = new_row-old_row
+    p delta_col.abs, delta_row.abs
+    p delta_col.abs == delta_row.abs
 
     if delta_col.abs == delta_row.abs then
       return true
@@ -133,8 +135,9 @@ class Queen < Ficha
   def valid_move?(old_row,old_col, new_row,new_col)
     delta_col = new_col-old_col
     delta_row = new_row-old_row
+    p delta_col, delta_row
 
-    if delta_col.abs == delta_row.abs or (delta_col.abs > 0 and delta_row.abs > 0) then
+    if delta_col.abs == delta_row.abs or !(delta_col.abs > 0 and delta_row.abs > 0) then
       return true
     else
       return false
