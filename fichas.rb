@@ -1,11 +1,11 @@
 class Ficha
   attr :row, :col, :color, :side, :sym
-  def initialize(row=nil, col=nil, color='w',side='bottom', sym='()')
+  def initialize(row=nil, col=nil, color='w',side='bottom')
     @row = row
     @col = col
     @color = color
     @side = side
-    @sym = sym
+    @sym = '--'
   end
 
   def move_to(new_row,new_col) #Row positive means to the right and column positive means up
@@ -29,13 +29,9 @@ end
 
 class Pawn < Ficha
   attr :sym, :row, :col, :color, :side
-  def initialize(row=nil, col=nil, color='w',side='bottom', id=0, sym='p')
-    @row = row
-    @col = col
-    @color = color
-    @side = side
-    @id = id
-    @sym = sym.to_s + color.to_s + id.to_s
+  def initialize(row=nil, col=nil, color='w',side='bottom')
+    super
+    @sym = 'p' + color.to_s
   end
 
   def valid_move?(old_row,old_col, new_row,new_col)

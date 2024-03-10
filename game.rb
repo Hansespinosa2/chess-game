@@ -25,7 +25,7 @@ class Game
   def new_game
     #Put pawns on opponent's side
     @board.board_matrix[1].each_with_index do |a_sym, i|
-      a_pawn = Pawn.new(row=1,col=i,color=@guest_color,side='top',id=i, sym='p')
+      a_pawn = Pawn.new(row=1,col=i,color=@guest_color,side='top')
       @board.board_matrix[1][i] = a_pawn.sym
       @board.ficha_hash[[1,i]] = a_pawn
 
@@ -33,7 +33,7 @@ class Game
 
     #put pawns on player side
     @board.board_matrix[6].each_with_index do |a_sym, i|
-      a_pawn = Pawn.new(row=6,col=i,color=@player_color,side='bottom',id=i, sym='p')
+      a_pawn = Pawn.new(row=6,col=i,color=@player_color,side='bottom')
       @board.board_matrix[6][i] = a_pawn.sym
       @board.ficha_hash[[6,i]] = a_pawn
     end
@@ -67,7 +67,7 @@ class Game
       end
       @board.ficha_hash[new_pos] = @board.ficha_hash[old_pos]
       @board.ficha_hash[old_pos] = nil
-      @board.board_matrix[old_pos[0]][old_pos[1]] = '( )'
+      @board.board_matrix[old_pos[0]][old_pos[1]] = '--'
       @board.board_matrix[new_pos[0]][new_pos[1]] = @board.ficha_hash[new_pos].sym
     end
   end

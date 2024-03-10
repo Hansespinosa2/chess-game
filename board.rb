@@ -3,7 +3,7 @@ class Board
   attr_accessor :board_matrix, :ficha_hash
   def initialize(board_matrix = nil)
     if board_matrix.nil? then
-      @board_matrix = 8.times.map { |i| 8.times.map { |j| "( )"} }
+      @board_matrix = 8.times.map { |i| 8.times.map { |j| "--"} }
 
     else
       @board_matrix = board_matrix
@@ -13,7 +13,9 @@ class Board
 
 
   def display_board
+    puts "\n"
     pp @board_matrix
+    puts "\n"
   end
 
   def initiate_ficha_hash
